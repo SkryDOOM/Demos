@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:E_Book">
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="FontFamily" Value="/E-Book;component/Styles/#Lato Semibold" />
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}" >
+        <Setter Property="FontFamily" Value="/E-Book;component/Styles/#Lato Semibold" />
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}" >
+        <Setter Property="FontFamily" Value="/E-Book;component/Styles/#Lato Semibold" />
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}" >
+        <Setter Property="FontFamily" Value="/E-Book;component/Styles/#Lato Semibold" />
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+
+    <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">
+        <Setter Property="FontFamily" Value="/E-Book;component/Styles/#Lato Semibold"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+</ResourceDictionary>

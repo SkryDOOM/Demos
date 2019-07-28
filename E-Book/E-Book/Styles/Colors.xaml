@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Color x:Key="PrimaryColor">#2F110B</Color>
+    <SolidColorBrush Color="{StaticResource PrimaryColor}" x:Key="PrimaryColorBrush"/>
+
+    <Color x:Key="SecondaryColor">#79452B</Color>
+    <SolidColorBrush Color="{StaticResource SecondaryColor}" x:Key="SecondaryColorBrush"/>
+
+    <Color x:Key="SideColor">#B87F6D</Color>
+    <SolidColorBrush Color="{StaticResource SideColor}" x:Key="SideColorBrush"/>
+
+    <Color x:Key="LightBrownColor">#DCA088</Color>
+    <SolidColorBrush Color="{StaticResource LightBrownColor}" x:Key="LightBrownColorBrush"/>
+
+    <Color x:Key="BackgroundColor">#F4F4EC</Color>
+    <SolidColorBrush Color="{StaticResource BackgroundColor}" x:Key="BackgroundColorBrush"/>
+
+    <Color x:Key="TextBackgroundColor">#FFCCBC</Color>
+    <SolidColorBrush Color="{StaticResource TextBackgroundColor}" x:Key="TextBackgroundColorBrush"/>
+
+    <Color x:Key="DataGridColor">#FFE3DA</Color>
+    <SolidColorBrush Color="{StaticResource DataGridColor}" x:Key="DataGridColorBrush"/>
+
+    <Color x:Key="PrimaryButtonColor">#FF7043</Color>
+    <SolidColorBrush Color="{StaticResource PrimaryButtonColor}" x:Key="PrimaryButtonColorBrush"/>
+
+    <Color x:Key="SecondaryButtonColor">#FFCC80</Color>
+    <SolidColorBrush Color="{StaticResource SecondaryButtonColor}" x:Key="SecondaryButtonColorBrush"/>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="{StaticResource PrimaryButtonColorBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryButtonColorBrush}"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="/E-Book;component/Styles/#Lato Semibold"/>
+    </Style>
+
+    <Style x:Key="SecondaryButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="{StaticResource SecondaryButtonColorBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SecondaryButtonColorBrush}"/>
+        <Setter Property="Foreground" Value="#212121"/>
+    </Style>
+
+</ResourceDictionary>

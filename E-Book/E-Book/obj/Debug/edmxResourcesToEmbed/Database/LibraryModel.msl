@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LibraryDatabaseModelStoreContainer" CdmEntityContainer="LibraryDatabaseEntities">
+    <EntitySetMapping Name="BookCopies">
+      <EntityTypeMapping TypeName="LibraryDatabaseModel.BookCopy">
+        <MappingFragment StoreEntitySet="BookCopies">
+          <ScalarProperty Name="IsBorrowed" ColumnName="IsBorrowed" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BookID" ColumnName="BookID" />
+          <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="LibraryDatabaseModel.Book">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BookName" ColumnName="BookName" />
+          <ScalarProperty Name="Authors" ColumnName="Authors" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="BookCopies" ColumnName="BookCopies" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BorrowedBooks">
+      <EntityTypeMapping TypeName="LibraryDatabaseModel.BorrowedBook">
+        <MappingFragment StoreEntitySet="BorrowedBooks">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LibID" ColumnName="LibID" />
+          <ScalarProperty Name="CopyID" ColumnName="CopyID" />
+          <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="LibraryDatabaseModel.Member">
+        <MappingFragment StoreEntitySet="Members">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="LibID" ColumnName="LibID" />
+          <ScalarProperty Name="ExpData" ColumnName="ExpData" />
+          <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

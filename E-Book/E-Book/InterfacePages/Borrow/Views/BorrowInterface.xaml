@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="E_Book.InterfacePages.BorrowInterface"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:E_Book.InterfacePages"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:E_Book.Converters"
+             mc:Ignorable="d"
+             xml:lang="en-IN"
+             Background="{StaticResource BackgroundColorBrush}">
+    
+    <StackPanel Orientation="Horizontal">
+
+        <!-- Leftside -->
+        <StackPanel Margin="10 0 0 10" HorizontalAlignment="Center">
+            <Label Style="{StaticResource DataTextLabel}" Content="Azonosítószám:"/>
+            <Label Style="{StaticResource DataTextLabel}" Content="Könyvek:"/>
+            <Label Style="{StaticResource DataTextLabel}" Content="Kölcsönző azonosítója:"/>
+            <Label Style="{StaticResource DataTextLabel}" Content="Kölcsönzés hossza:"/>
+        </StackPanel>
+
+        <!-- Rightside-->
+        <StackPanel Margin="30 0 10 0">
+
+            <StackPanel Orientation="Horizontal">
+                <TextBox Style="{StaticResource DataTextBoxes}" Text="{Binding BookID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="6">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding DataContext.AddBookCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Button Content="Hozzáad" Command="{Binding DataContext.AddBookCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" Margin="10 0 0 0" Style="{StaticResource SecondaryButtonStyle}" Width="120"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Height="40" Width="250" ItemsSource="{Binding BorrowedBooksList}" Background="{StaticResource TextBackgroundColorBrush}" 
+                      IsHitTestVisible="True" Text="Kikölcsönzött könyvek" HorizontalAlignment="Left" Margin="10" SelectedIndex="0" SelectedItem="{Binding SelectedBook}">
+
+                    <ComboBox.InputBindings>
+                        <KeyBinding Key="Delete" Command="{Binding DeleteItemCommand}"/>
+                    </ComboBox.InputBindings>
+                    
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Viewbox HorizontalAlignment="Left">
+                                <StackPanel >
+                                    <Label Content="{Binding BookCode}" Padding="5 0 0 5" Margin="0" FontSize="15" />
+                                    <Label Content="{Binding BookName}" Padding="5 0 0 0" Margin="0" FontSize="15" />
+                                </StackPanel>
+                            </Viewbox>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Button Content="Törlés" Command="{Binding DeleteItemCommand}" Margin="10 0 0 0" Style="{StaticResource SecondaryButtonStyle}" Width="120"/>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+              
+                <Grid HorizontalAlignment="Left">
+                    <TextBox Style="{StaticResource DataTextBoxes}" Text="{Binding MemberID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5"/>
+                    <materialDesign:PackIcon HorizontalAlignment="Right" Kind="CheckAll" Height="35" IsHitTestVisible="False" Visibility="{Binding IsExist, Converter={converters:BoolToVisibilityConverter}}"  Width="35" Margin="0 13 15 0" Foreground="DarkGreen"/>
+                </Grid>
+
+                <TextBlock Text="Lejárt tagság!" Visibility="{Binding IsExpired, Converter={converters:BoolToVisibilityConverter}}" FontFamily="Lato Semibold" VerticalAlignment="Center" FontSize="20"/>
+
+            </StackPanel>
+
+            <DatePicker Width="250" FontSize="20" VerticalContentAlignment="Center" Text="{Binding ExpDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10" Height="40" Background="{StaticResource TextBackgroundColorBrush}"/>
+
+        </StackPanel>
+
+    </StackPanel>
+</UserControl>

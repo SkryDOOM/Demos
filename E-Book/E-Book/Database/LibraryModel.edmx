@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LibraryDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookCopies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="BookCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsBorrowed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Authors" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Year" Type="smallint" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BookCopies" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BorrowedBooks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LibID" Type="int" Nullable="false" />
+          <Property Name="CopyID" Type="int" Nullable="false" />
+          <Property Name="ExpDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LibID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ExpData" Type="date" Nullable="false" />
+          <Property Name="PlaceOfBirth" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="MobilePhone" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__BookCopie__BookI__2E1BDC42">
+          <End Role="Books" Type="Self.Books" Multiplicity="1" />
+          <End Role="BookCopies" Type="Self.BookCopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookCopies">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BorrowedB__CopyI__300424B4">
+          <End Role="BookCopies" Type="Self.BookCopies" Multiplicity="1" />
+          <End Role="BorrowedBooks" Type="Self.BorrowedBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookCopies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BorrowedBooks">
+              <PropertyRef Name="CopyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BorrowedB__LibID__2F10007B">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="BorrowedBooks" Type="Self.BorrowedBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BorrowedBooks">
+              <PropertyRef Name="LibID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibraryDatabaseModelStoreContainer">
+          <EntitySet Name="BookCopies" EntityType="Self.BookCopies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BorrowedBooks" EntityType="Self.BorrowedBooks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BookCopie__BookI__2E1BDC42" Association="Self.FK__BookCopie__BookI__2E1BDC42">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="BookCopies" EntitySet="BookCopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BorrowedB__CopyI__300424B4" Association="Self.FK__BorrowedB__CopyI__300424B4">
+            <End Role="BookCopies" EntitySet="BookCopies" />
+            <End Role="BorrowedBooks" EntitySet="BorrowedBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BorrowedB__LibID__2F10007B" Association="Self.FK__BorrowedB__LibID__2F10007B">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="BorrowedBooks" EntitySet="BorrowedBooks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibraryDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BookCopy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="BookCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="Self.FK__BookCopie__BookI__2E1BDC42" FromRole="BookCopies" ToRole="Books" />
+          <NavigationProperty Name="BorrowedBooks" Relationship="Self.FK__BorrowedB__CopyI__300424B4" FromRole="BookCopies" ToRole="BorrowedBooks" />
+          <Property Name="IsBorrowed" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Authors" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Year" Type="Int16" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookCopies" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="BookCopies1" Relationship="Self.FK__BookCopie__BookI__2E1BDC42" FromRole="Books" ToRole="BookCopies" />
+        </EntityType>
+        <EntityType Name="BorrowedBook">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LibID" Type="Int32" Nullable="false" />
+          <Property Name="CopyID" Type="Int32" Nullable="false" />
+          <Property Name="ExpDate" Type="DateTime" Precision="0" Nullable="false" />
+          <NavigationProperty Name="BookCopy" Relationship="Self.FK__BorrowedB__CopyI__300424B4" FromRole="BorrowedBooks" ToRole="BookCopies" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__BorrowedB__LibID__2F10007B" FromRole="BorrowedBooks" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LibID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExpData" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="PlaceOfBirth" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MobilePhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BorrowedBooks" Relationship="Self.FK__BorrowedB__LibID__2F10007B" FromRole="Members" ToRole="BorrowedBooks" />
+        </EntityType>
+        <Association Name="FK__BookCopie__BookI__2E1BDC42">
+          <End Role="Books" Type="Self.Book" Multiplicity="1" />
+          <End Role="BookCopies" Type="Self.BookCopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookCopies">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BorrowedB__CopyI__300424B4">
+          <End Role="BookCopies" Type="Self.BookCopy" Multiplicity="1" />
+          <End Role="BorrowedBooks" Type="Self.BorrowedBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookCopies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BorrowedBooks">
+              <PropertyRef Name="CopyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BorrowedB__LibID__2F10007B">
+          <End Role="Members" Type="Self.Member" Multiplicity="1" />
+          <End Role="BorrowedBooks" Type="Self.BorrowedBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BorrowedBooks">
+              <PropertyRef Name="LibID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibraryDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BookCopies" EntityType="Self.BookCopy" />
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="BorrowedBooks" EntityType="Self.BorrowedBook" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <AssociationSet Name="FK__BookCopie__BookI__2E1BDC42" Association="Self.FK__BookCopie__BookI__2E1BDC42">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="BookCopies" EntitySet="BookCopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BorrowedB__CopyI__300424B4" Association="Self.FK__BorrowedB__CopyI__300424B4">
+            <End Role="BookCopies" EntitySet="BookCopies" />
+            <End Role="BorrowedBooks" EntitySet="BorrowedBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BorrowedB__LibID__2F10007B" Association="Self.FK__BorrowedB__LibID__2F10007B">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="BorrowedBooks" EntitySet="BorrowedBooks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LibraryDatabaseModelStoreContainer" CdmEntityContainer="LibraryDatabaseEntities">
+          <EntitySetMapping Name="BookCopies">
+            <EntityTypeMapping TypeName="LibraryDatabaseModel.BookCopy">
+              <MappingFragment StoreEntitySet="BookCopies">
+                <ScalarProperty Name="IsBorrowed" ColumnName="IsBorrowed" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="LibraryDatabaseModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="Authors" ColumnName="Authors" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="BookCopies" ColumnName="BookCopies" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BorrowedBooks">
+            <EntityTypeMapping TypeName="LibraryDatabaseModel.BorrowedBook">
+              <MappingFragment StoreEntitySet="BorrowedBooks">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LibID" ColumnName="LibID" />
+                <ScalarProperty Name="CopyID" ColumnName="CopyID" />
+                <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="LibraryDatabaseModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LibID" ColumnName="LibID" />
+                <ScalarProperty Name="ExpData" ColumnName="ExpData" />
+                <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
